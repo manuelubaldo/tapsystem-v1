@@ -15,7 +15,7 @@ namespace RESTfulAPI.Controllers
         {
 
             var result = from u in db.tblUsers
-                         where u.tUserName == User.tUserName && u.tPassword == User.tPassword
+                         where u.tUserName == User.tUserName && u.tPassword == User.tPassword && u.bActive == 1
                          select u;
 
             if (result.Count()<1)
