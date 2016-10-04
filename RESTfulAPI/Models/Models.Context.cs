@@ -37,5 +37,6 @@ namespace RESTfulAPI.Models
         public virtual DbSet<tblSystemLog> tblSystemLogs { get; set; }
         public virtual DbSet<tblTransaction> tblTransactions { get; set; }
         public virtual DbSet<tblUserMatrix> tblUserMatrices { get; set; }
+        public virtual DbSet<tblBusAssignment> tblBusAssignments { get; set; }
     }
 }

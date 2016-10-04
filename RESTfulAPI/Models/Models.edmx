@@ -21,6 +21,19 @@
           <Property Name="dDateModified" Type="smalldatetime" />
           <Property Name="bActive" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblBusAssignments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iConductorID" Type="int" Nullable="false" />
+          <Property Name="iDriverID" Type="int" Nullable="false" />
+          <Property Name="iInspector" Type="int" Nullable="false" />
+          <Property Name="iBusID" Type="int" Nullable="false" />
+          <Property Name="iRouteID" Type="int" Nullable="false" />
+          <Property Name="dDateOfAssignment" Type="smalldatetime" Nullable="false" />
+          <Property Name="bActive" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblCity">
           <Key>
             <PropertyRef Name="iCityID" />
@@ -173,8 +186,69 @@
           <Property Name="dDateModified" Type="smalldatetime" />
           <Property Name="bActive" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tblBusAssignments_tblBusAssignments">
+          <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+          <End Role="tblBusAssignments" Type="Self.tblBusAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="iBusID" />
+            </Principal>
+            <Dependent Role="tblBusAssignments">
+              <PropertyRef Name="iBusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblRoutes">
+          <End Role="tblRoutes" Type="Self.tblRoutes" Multiplicity="1" />
+          <End Role="tblBusAssignments" Type="Self.tblBusAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoutes">
+              <PropertyRef Name="iRouteID" />
+            </Principal>
+            <Dependent Role="tblBusAssignments">
+              <PropertyRef Name="iRouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblBusAssignments" Type="Self.tblBusAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblBusAssignments">
+              <PropertyRef Name="iConductorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblUsers1">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblBusAssignments" Type="Self.tblBusAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblBusAssignments">
+              <PropertyRef Name="iDriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblUsers2">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblBusAssignments" Type="Self.tblBusAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblBusAssignments">
+              <PropertyRef Name="iInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="tapsystemModelStoreContainer">
           <EntitySet Name="tblBus" EntityType="Self.tblBus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBusAssignments" EntityType="Self.tblBusAssignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCity" EntityType="Self.tblCity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEnrolledAccounts" EntityType="Self.tblEnrolledAccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMasterSetting" EntityType="Self.tblMasterSetting" Schema="dbo" store:Type="Tables" />
@@ -186,6 +260,26 @@
           <EntitySet Name="tblTransactions" EntityType="Self.tblTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserMatrix" EntityType="Self.tblUserMatrix" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBusAssignments_tblBusAssignments" Association="Self.FK_tblBusAssignments_tblBusAssignments">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusAssignments" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblRoutes" Association="Self.FK_tblBusAssignments_tblRoutes">
+            <End Role="tblRoutes" EntitySet="tblRoutes" />
+            <End Role="tblBusAssignments" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblUsers" Association="Self.FK_tblBusAssignments_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblBusAssignments" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblUsers1" Association="Self.FK_tblBusAssignments_tblUsers1">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblBusAssignments" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblUsers2" Association="Self.FK_tblBusAssignments_tblUsers2">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblBusAssignments" EntitySet="tblBusAssignments" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -280,7 +374,7 @@
           <Property Name="dDateModified" Type="DateTime" Precision="0" />
           <Property Name="bActive" Type="Int32" Nullable="false" />
           <Property Name="tImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+          </EntityType>
         <EntityContainer Name="TapSystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblCities" EntityType="Self.tblCity" />
           <EntitySet Name="tblEnrolledAccounts" EntityType="Self.tblEnrolledAccount" />
@@ -294,6 +388,27 @@
           <EntitySet Name="tblSystemLogs" EntityType="tapsystemModel.tblSystemLog" />
           <EntitySet Name="tblTransactions" EntityType="tapsystemModel.tblTransaction" />
           <EntitySet Name="tblUserMatrices" EntityType="tapsystemModel.tblUserMatrix" />
+          <EntitySet Name="tblBusAssignments" EntityType="tapsystemModel.tblBusAssignment" />
+          <AssociationSet Name="FK_tblBusAssignments_tblBusAssignments" Association="tapsystemModel.FK_tblBusAssignments_tblBusAssignments">
+            <End Role="tblBus" EntitySet="tblBus1" />
+            <End Role="tblBusAssignment" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblRoutes" Association="tapsystemModel.FK_tblBusAssignments_tblRoutes">
+            <End Role="tblRoute" EntitySet="tblRoutes" />
+            <End Role="tblBusAssignment" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblUsers" Association="tapsystemModel.FK_tblBusAssignments_tblUsers">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblBusAssignment" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblUsers1" Association="tapsystemModel.FK_tblBusAssignments_tblUsers1">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblBusAssignment" EntitySet="tblBusAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusAssignments_tblUsers2" Association="tapsystemModel.FK_tblBusAssignments_tblUsers2">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblBusAssignment" EntitySet="tblBusAssignments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tblBus">
           <Key>
@@ -373,6 +488,84 @@
           <Property Name="dDateModified" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="bActive" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblBusAssignment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iConductorID" Type="Int32" Nullable="false" />
+          <Property Name="iDriverID" Type="Int32" Nullable="false" />
+          <Property Name="iInspector" Type="Int32" Nullable="false" />
+          <Property Name="iBusID" Type="Int32" Nullable="false" />
+          <Property Name="iRouteID" Type="Int32" Nullable="false" />
+          <Property Name="dDateOfAssignment" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="bActive" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblBus" Relationship="tapsystemModel.FK_tblBusAssignments_tblBusAssignments" FromRole="tblBusAssignment" ToRole="tblBus" />
+          <NavigationProperty Name="tblRoute" Relationship="tapsystemModel.FK_tblBusAssignments_tblRoutes" FromRole="tblBusAssignment" ToRole="tblRoute" />
+          <NavigationProperty Name="conductor" Relationship="tapsystemModel.FK_tblBusAssignments_tblUsers" FromRole="tblBusAssignment" ToRole="tblUser" />
+          <NavigationProperty Name="driver" Relationship="tapsystemModel.FK_tblBusAssignments_tblUsers1" FromRole="tblBusAssignment" ToRole="tblUser" />
+          <NavigationProperty Name="inspector" Relationship="tapsystemModel.FK_tblBusAssignments_tblUsers2" FromRole="tblBusAssignment" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblBusAssignments_tblBusAssignments">
+          <End Type="tapsystemModel.tblBus" Role="tblBus" Multiplicity="1" />
+          <End Type="tapsystemModel.tblBusAssignment" Role="tblBusAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="iBusID" />
+            </Principal>
+            <Dependent Role="tblBusAssignment">
+              <PropertyRef Name="iBusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblRoutes">
+          <End Type="tapsystemModel.tblRoute" Role="tblRoute" Multiplicity="1" />
+          <End Type="tapsystemModel.tblBusAssignment" Role="tblBusAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoute">
+              <PropertyRef Name="iRouteID" />
+            </Principal>
+            <Dependent Role="tblBusAssignment">
+              <PropertyRef Name="iRouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblUsers">
+          <End Type="tapsystemModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="tapsystemModel.tblBusAssignment" Role="tblBusAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblBusAssignment">
+              <PropertyRef Name="iConductorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblUsers1">
+          <End Type="tapsystemModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="tapsystemModel.tblBusAssignment" Role="tblBusAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblBusAssignment">
+              <PropertyRef Name="iDriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusAssignments_tblUsers2">
+          <End Type="tapsystemModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="tapsystemModel.tblBusAssignment" Role="tblBusAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblBusAssignment">
+              <PropertyRef Name="iInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -556,6 +749,20 @@
                 <ScalarProperty Name="iModuleID" ColumnName="iModuleID" />
                 <ScalarProperty Name="iUserID" ColumnName="iUserID" />
                 <ScalarProperty Name="iMatrixID" ColumnName="iMatrixID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBusAssignments">
+            <EntityTypeMapping TypeName="tapsystemModel.tblBusAssignment">
+              <MappingFragment StoreEntitySet="tblBusAssignments">
+                <ScalarProperty Name="bActive" ColumnName="bActive" />
+                <ScalarProperty Name="dDateOfAssignment" ColumnName="dDateOfAssignment" />
+                <ScalarProperty Name="iRouteID" ColumnName="iRouteID" />
+                <ScalarProperty Name="iBusID" ColumnName="iBusID" />
+                <ScalarProperty Name="iInspector" ColumnName="iInspector" />
+                <ScalarProperty Name="iDriverID" ColumnName="iDriverID" />
+                <ScalarProperty Name="iConductorID" ColumnName="iConductorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

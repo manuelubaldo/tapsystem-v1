@@ -17,6 +17,12 @@
         <EntityTypeShape EntityType="tapsystemModel.tblSystemLog" Width="1.5" PointX="2.75" PointY="8.75" />
         <EntityTypeShape EntityType="tapsystemModel.tblTransaction" Width="1.5" PointX="4.75" PointY="8.75" />
         <EntityTypeShape EntityType="tapsystemModel.tblUserMatrix" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="tapsystemModel.tblBusAssignment" Width="1.5" PointX="10" PointY="2.875" />
+        <AssociationConnector Association="tapsystemModel.FK_tblBusAssignments_tblBusAssignments" />
+        <AssociationConnector Association="tapsystemModel.FK_tblBusAssignments_tblRoutes" />
+        <AssociationConnector Association="tapsystemModel.FK_tblBusAssignments_tblUsers" />
+        <AssociationConnector Association="tapsystemModel.FK_tblBusAssignments_tblUsers1" />
+        <AssociationConnector Association="tapsystemModel.FK_tblBusAssignments_tblUsers2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
