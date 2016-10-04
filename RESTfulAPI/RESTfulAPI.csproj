@@ -166,6 +166,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BusAssignmentController.cs" />
     <Compile Include="Controllers\BusController.cs" />
     <Compile Include="Controllers\ChargingController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusAssignmentDTO.cs" />
     <Compile Include="Models\Fair.cs" />
     <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
@@ -197,6 +199,9 @@
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tblBus.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBusAssignment.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblCity.cs">
